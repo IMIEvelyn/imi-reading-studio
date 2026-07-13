@@ -173,3 +173,107 @@ btnSaveEdit.addEventListener('click', () => {
         stepItems[2].classList.add('active'); 
     }
 });
+// ==== 優雅喝茶模組控制與防呆變數 ====
+const teaModal = document.getElementById('tea-modal');
+const teaMessage = document.getElementById('tea-message');
+const btnCloseTea = document.getElementById('btn-close-tea');
+const teaDecisionActions = document.getElementById('tea-decision-actions');
+const btnKeepMark = document.getElementById('btn-keep-mark');
+const btnOverwriteMark = document.getElementById('btn-overwrite-mark');
+
+let pendingVocab = null; // 暫存發生衝突的詞彙
+let pendingType = null;  // 暫存老師想要覆蓋的新標記
+
+btnCloseTea.addEventListener('click', () => teaModal.classList.add('hidden'));
+btnKeepMark.addEventListener('click', () => {
+    teaModal.classList.add('hidden');
+    pendingVocab = null;
+    pendingType = null;
+});
+btnOverwriteMark.addEventListener('click', () => {
+    teaModal.classList.add('hidden');
+    if (pendingVocab && pendingType) {
+        if (pendingType === 'general') { pendingVocab.important = false; pendingVocab.grammar = false; }
+        else if (pendingType === 'important') { pendingVocab.important = true; }
+        else if (pendingType === 'grammar') { pendingVocab.grammar = true; }
+        renderVocabUI();
+        syncTextDisplay(pendingVocab);
+    }
+});
+
+function showTeaTime(msg, isConflict = false) {
+    teaMessage.textContent = msg;
+    if (isConflict) {
+        btnCloseTea.classList.add('hidden');
+        teaDecisionActions.classList.remove('hidden');
+    } else {
+        btnCloseTea.classList.remove('hidden');
+        teaDecisionActions.classList.add('hidden');
+    }
+    teaModal.classList.remove('hidden');
+}
+// ==== 統一處理標記邏輯 (支援防呆與反悔) ====
+function processMarkLogic(vocabObj, type) {
+    if (type === 'grammar') {
+        vocabObj.grammar = !vocabObj.grammar; // 反悔切換 (Toggle)
+        renderVocabUI(); syncTextDisplay(vocabObj);
+    } 
+    else if (type === 'important') {
+        if (vocabObj.important) {
+            vocabObj.important = false; // 反悔切換 (Toggle off)
+            renderVocabUI(); syncTextDisplay(vocabObj);
+        } else {
+            vocabObj.important = true;
+            renderVocabUI(); syncTextDisplay(vocabObj);
+        }
+    } 
+    else if (type === 'general') {
+        if (vocabObj.important || vocabObj.grammar) {
+            // 防呆攔截：試圖將已有標記的詞彙改為一般
+            pendingVocab = vocabObj;
+            pendingType = 'general';
+            showTeaTime(`老師，【${vocabObj.word}】目前已有特定標記，您確定要將它改回「一般詞彙」嗎？`, true);
+        } else {
+            vocabObj.important = false; vocabObj.grammar = false;
+            renderVocabUI(); syncTextDisplay(vocabObj);
+        }
+    }
+}
+
+function handleMarkAction(type) {
+    const selection = window.getSelection();
+    const selectedText = selection.toString().trim();
+
+    if (selectedText) {
+        let existingVocab = vocabList.find(v => v.word === selectedText);
+        if (!existingVocab) {
+            existingVocab = { word: selectedText, important: false, grammar: false };
+            vocabList.push(existingVocab);
+        }
+        selectedVocabTag = existingVocab;
+        processMarkLogic(existingVocab, type);
+        selection.removeAllRanges(); 
+    } 
+    else if (selectedVocabTag) {
+        processMarkLogic(selectedVocabTag, type);
+    } 
+    else {
+        showTeaTime('休息一下吧！請先點選一個生詞標籤，或在左側反白課文文字喔。', false);
+    }
+}
+
+// 綁定所有按鈕 (攔截焦點轉移)
+const allMarkButtons = [
+    { id: 'vocab-mark-general', type: 'general' }, { id: 'vocab-mark-important', type: 'important' }, { id: 'vocab-mark-grammar', type: 'grammar' },
+    { id: 'mark-general', type: 'general' }, { id: 'mark-important', type: 'important' }, { id: 'mark-grammar', type: 'grammar' }
+];
+
+allMarkButtons.forEach(btnInfo => {
+    const btn = document.getElementById(btnInfo.id);
+    if (btn) {
+        btn.addEventListener('mousedown', (e) => {
+            e.preventDefault(); 
+            handleMarkAction(btnInfo.type);
+        });
+    }
+});
