@@ -226,3 +226,26 @@ button {
 .dialogue-a { color: #2c3e50; margin-bottom: 10px; }
 .dialogue-b { color: #8e44ad; margin-bottom: 10px; }
 .paragraph { margin-bottom: 15px; }
+/* 生詞顯示區設計 */
+.vocab-section {
+    background: #fdfdfd;
+    border: 1px solid #f0e6dd;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+.vocab-section h4 {
+    margin-top: 0;
+    color: #8c7a6b;
+    margin-bottom: 10px;
+}
+.vocab-tag {
+    display: inline-block;
+    background: #fdf1e8;
+    color: #d95e40;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin: 0 8px 8px 0;
+    font-size: 1rem;
+    border: 1px solid #f5d6c6;
+}
