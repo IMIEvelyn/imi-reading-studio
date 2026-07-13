@@ -7,50 +7,86 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 頂部品牌區 -->
+    <header class="app-header">
+        <div class="logo-area">
+            <div class="logo-circle">IMI</div>
+            <div class="brand-text">
+                <h1>IMI. 華語文本閱讀學習</h1>
+                <p>InkHear Mandarin Immersion.Teacher Studio</p>
+            </div>
+        </div>
+        
+        <!-- 步驟進度條 -->
+        <div class="step-progress">
+            <div class="step-item active"><span class="step-num">1</span> 匯入教材</div>
+            <div class="step-arrow">›</div>
+            <div class="step-item"><span class="step-num">2</span> 教材編輯</div>
+            <div class="step-arrow">›</div>
+            <div class="step-item"><span class="step-num">3</span> 參數設定</div>
+            <div class="step-arrow">›</div>
+            <div class="step-item"><span class="step-num">4</span> 學生預覽</div>
+        </div>
+    </header>
+
     <div class="container">
         <!-- 步驟一：教材匯入區 -->
         <div id="step1-import" class="view-section active">
-            <h2>步驟一：匯入教材</h2>
-            <label for="text-input">課文文本：</label>
-            <textarea id="text-input" placeholder="請貼上課文或對話（對話請以 A: 和 B: 開頭）"></textarea>
             
-            <label for="vocab-input">生詞詞彙（請以逗號或換行分隔）：</label>
-            <textarea id="vocab-input" placeholder="例如：學生, 老師, 學校"></textarea>
-            
-            <button id="btn-to-edit" class="primary-btn">匯入並開始編輯</button>
-        </div>
+            <div class="title-section">
+                <h2>✨ 提升華語教材製作效率 ✨</h2>
+                <p>專為 華語教師 量身打造的智能文本閱讀器</p>
+            </div>
 
-        <!-- 步驟二：教材編輯區 -->
-        <div id="step2-edit" class="view-section hidden">
-            <h2>步驟二：教材編輯</h2>
-            <div class="edit-workspace">
-                <div class="text-display" id="text-display">
-                    <!-- 文本將在這裡動態生成 -->
-                </div>
+            <!-- 輸入區卡片 -->
+            <div class="card">
+                <h3>⚡️ 請貼上您的教材內容</h3>
+                <p class="card-hint">請匯入專屬文本與生詞，系統將為您快速歸位排版！</p>
                 
-                <div class="tools-panel">
-                    <h3>標記工具</h3>
-                    <p>請反白左側文本後，點擊下方按鈕進行標記：</p>
-                    <button class="tool-btn" id="mark-important">標記重要詞彙</button>
-                    <button class="tool-btn" id="mark-general">標記一般詞彙</button>
-                    <button class="tool-btn" id="mark-grammar">標記語法</button>
-                </div>
+                <label for="text-input">課文文本（接受 正體中文，對話請以 A: 和 B: 開頭）：</label>
+                <textarea id="text-input" placeholder="請在此貼上您的文本..."></textarea>
+                
+                <label for="vocab-input">生詞詞彙（請以逗號或換行分隔）：</label>
+                <textarea id="vocab-input" placeholder="例如：學生, 老師, 學校..."></textarea>
             </div>
             
-            <button id="btn-save-edit" class="primary-btn">確認教材編輯</button>
+            <!-- 操作按鈕卡片 -->
+            <div class="card action-card">
+                <button id="btn-to-edit" class="primary-btn">上傳並開始編輯</button>
+            </div>
         </div>
 
-        <!-- 步驟三：AI 參數設定區 (預留區塊) -->
+        <!-- 步驟二：教材編輯區 (套用新卡片樣式) -->
+        <div id="step2-edit" class="view-section hidden">
+            <div class="card">
+                <h3>⚡️ 步驟二：教材編輯</h3>
+                <div class="edit-workspace">
+                    <div class="text-display" id="text-display">
+                        <!-- 文本將在這裡動態生成 -->
+                    </div>
+                    
+                    <div class="tools-panel">
+                        <p>標記工具 (請反白文本後點擊)：</p>
+                        <button class="tool-btn" id="mark-important">標記重要詞彙</button>
+                        <button class="tool-btn" id="mark-general">標記一般詞彙</button>
+                        <button class="tool-btn" id="mark-grammar">標記語法</button>
+                    </div>
+                </div>
+                <button id="btn-save-edit" class="primary-btn">確認教材編輯</button>
+            </div>
+        </div>
+
+        <!-- 步驟三與步驟四 (預留區塊) -->
         <div id="step3-params" class="view-section hidden">
-            <h2>步驟三：AI 參數設定</h2>
-            <!-- 參數設定表單將在此建置 -->
-            <button id="btn-generate" class="primary-btn">呼叫 AI 生成學生端教材</button>
+            <div class="card">
+                <h3>❗️ 步驟三：AI 參數設定</h3>
+                <button id="btn-generate" class="primary-btn">呼叫 AI 生成學生端教材</button>
+            </div>
         </div>
-
-        <!-- 步驟四：預覽區 (預留區塊) -->
         <div id="step4-preview" class="view-section hidden">
-            <h2>步驟四：學生端預覽</h2>
-            <!-- HTML 預覽與連結將在此建置 -->
+            <div class="card">
+                <h3>步驟四：學生端預覽</h3>
+            </div>
         </div>
     </div>
 
