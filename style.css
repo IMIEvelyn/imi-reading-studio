@@ -297,3 +297,25 @@ button {
 .vocab-span { padding: 0 2px; border-radius: 4px; background-color: #e8f5e9; color: #2e7d32; }
 .vocab-span.is-important { background-color: #ffe0d2; color: #d95e40; }
 .vocab-span.is-grammar { text-decoration: underline dashed; text-underline-offset: 4px; }
+/* ==== 版面微調：新增詞彙與標記工具同排更大氣 ==== */
+.vocab-tools-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+.vocab-add-area {
+    margin-top: 0; /* 清除舊有邊距 */
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.vocab-add-area input {
+    width: 180px; /* 加寬輸入框，顯得更大氣 */
+    padding: 8px 12px;
+    font-size: 1.05rem;
+}
+.vocab-tools {
+    margin-bottom: 0; /* 清除舊有邊距 */
+}
