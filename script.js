@@ -26,7 +26,6 @@ btnToEdit.addEventListener('click', () => {
     step2.classList.remove('hidden');
     step2.classList.add('active');
 });
-
 // 解析文本：判斷是短文還是對話
 function parseAndDisplayText(text) {
     textDisplay.innerHTML = ''; // 清空顯示區
@@ -55,7 +54,6 @@ function parseAndDisplayText(text) {
         textDisplay.appendChild(p);
     });
 }
-
 // 從步驟二跳轉至步驟三 (AI 參數設定)
 btnSaveEdit.addEventListener('click', () => {
     step2.classList.remove('active');
