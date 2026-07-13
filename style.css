@@ -319,15 +319,19 @@ button {
 .vocab-tools {
     margin-bottom: 0; /* 清除舊有邊距 */
 }
-/* 喝茶畫面決策按鈕排版 */
-.tea-actions {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 15px;
+
+.tea-modal {
+    position: fixed !important; /* 強制固定定位 */
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(253, 248, 244, 0.95) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 9999 !important; /* 確保在最上層 */
 }
-.tea-actions button {
-    margin: 0;
-    width: auto;
-    flex: 1;
+.tea-modal.hidden {
+    display: none !important; /* 強制隱藏 */
 }
