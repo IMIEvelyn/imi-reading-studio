@@ -258,7 +258,7 @@ function handleMarkAction(type) {
         processMarkLogic(selectedVocabTag, type);
     } 
     else {
-        showTeaTime('休息一下吧！請先點選一個生詞標籤，或在左側反白課文文字喔。', false);
+        showTeaTime('請先點選一個生詞標籤，或在左側反白課文文字喔。', false);
     }
 }
 
