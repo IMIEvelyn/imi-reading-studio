@@ -249,3 +249,55 @@ button {
     font-size: 1rem;
     border: 1px solid #f5d6c6;
 }
+/* 生詞互動與標記色彩 */
+.vocab-tag {
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+.vocab-tag.selected {
+    border: 2px solid #a68b75;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.vocab-delete {
+    margin-left: 8px;
+    cursor: pointer;
+    color: #e56b55;
+    font-weight: bold;
+}
+.vocab-delete:hover {
+    color: #c0392b;
+}
+
+/* 多層次標記專屬顏色 (融入 IMI 暖色調) */
+.mark-important { background-color: #ffdce0; color: #d90000; border-radius: 4px; padding: 2px 4px; }
+.mark-general { background-color: #fff0b3; color: #8a6d00; border-radius: 4px; padding: 2px 4px; }
+.mark-grammar { background-color: #d4edda; color: #155724; border-radius: 4px; padding: 2px 4px; }
+
+/* 新增詞彙區域設計 */
+.vocab-add-area {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.vocab-add-area input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #f0e6dd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin: 0;
+    height: auto;
+}
+.vocab-add-area button {
+    background-color: #fdf1e8;
+    color: #d95e40;
+    border: 1px solid #f5d6c6;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: auto;
+    margin: 0;
+}
