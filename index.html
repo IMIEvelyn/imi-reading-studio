@@ -56,16 +56,21 @@
             </div>
         </div>
 
-        <!-- 步驟二：教材編輯區 (套用新卡片樣式) -->
+        <!-- 步驟二：教材編輯區 -->
         <div id="step2-edit" class="view-section hidden">
             <div class="card">
                 <h3>⚡️ 步驟二：教材編輯</h3>
                 
-                <!-- 新增：生詞展示區 -->
+                <!-- 生詞展示與編輯區 -->
                 <div class="vocab-section">
                     <h4>📝 匯入的生詞：</h4>
                     <div id="vocab-display" class="vocab-tags">
                         <!-- 生詞標籤將在這裡動態生成 -->
+                    </div>
+                    <!-- 新增詞彙工具區 -->
+                    <div class="vocab-add-area">
+                        <input type="text" id="new-vocab-input" placeholder="新增詞彙...">
+                        <button id="btn-add-vocab">新增</button>
                     </div>
                 </div>
 
@@ -75,7 +80,7 @@
                     </div>
                     
                     <div class="tools-panel">
-                        <p>標記工具 (請反白文本後點擊)：</p>
+                        <p>標記工具 (請先點擊生詞標籤，或反白課文)：</p>
                         <button class="tool-btn" id="mark-important">標記重要詞彙</button>
                         <button class="tool-btn" id="mark-general">標記一般詞彙</button>
                         <button class="tool-btn" id="mark-grammar">標記語法</button>
@@ -84,7 +89,8 @@
                 <button id="btn-save-edit" class="primary-btn">確認教材編輯</button>
             </div>
         </div>
-        <!-- 步驟三與步驟四 (預留區塊) -->
+
+        <!-- 步驟三與步驟四 -->
         <div id="step3-params" class="view-section hidden">
             <div class="card">
                 <h3>❗️ 步驟三：AI 參數設定</h3>
@@ -97,8 +103,8 @@
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
+
 
