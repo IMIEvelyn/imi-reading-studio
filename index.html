@@ -61,9 +61,17 @@
             <div class="card">
                 <h3>⚡️ 步驟二：教材編輯</h3>
                 
-                <!-- 生詞展示與編輯區 -->
+               <!-- 生詞展示與編輯區 -->
                 <div class="vocab-section">
                     <h4>📝 匯入的生詞：</h4>
+                    
+                    <!-- 新增：詞彙區專屬標記按鈕 -->
+                    <div class="vocab-tools">
+                        <button class="tool-btn-small" id="vocab-mark-general">標記一般</button>
+                        <button class="tool-btn-small" id="vocab-mark-important">標記重要(★)</button>
+                        <button class="tool-btn-small" id="vocab-mark-grammar">標記語法(虛線)</button>
+                    </div>
+                    
                     <div id="vocab-display" class="vocab-tags">
                         <!-- 生詞標籤將在這裡動態生成 -->
                     </div>
