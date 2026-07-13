@@ -319,3 +319,15 @@ button {
 .vocab-tools {
     margin-bottom: 0; /* 清除舊有邊距 */
 }
+/* 喝茶畫面決策按鈕排版 */
+.tea-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+}
+.tea-actions button {
+    margin: 0;
+    width: auto;
+    flex: 1;
+}
