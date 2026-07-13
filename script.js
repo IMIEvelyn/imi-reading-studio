@@ -22,7 +22,9 @@ btnToEdit.addEventListener('click', () => {
     if (vocabInput) parseAndDisplayVocab(vocabInput.value.trim());
     step1.classList.remove('active'); step1.classList.add('hidden');
     step2.classList.remove('hidden'); step2.classList.add('active');
-    if (stepItems.length > 0) { stepItems[0].classList.remove('active'); stepItems[1].classList.add('active'); }
+    if (stepItems.length > 0) { 
+        stepItems[0].classList.remove('active'); stepItems[1].classList.add('active'); 
+    }
 });
 function parseAndDisplayText(text) {
     textDisplay.innerHTML = ''; 
@@ -72,13 +74,12 @@ function renderVocabUI() {
             e.stopPropagation();
             vocabList.splice(index, 1);
             if (selectedVocabTag === v) selectedVocabTag = null;
-            renderVocabUI(); // 刪除詞彙，不連動課文，保持零干擾
+            renderVocabUI(); 
         });
         span.appendChild(delBtn);
         vocabDisplay.appendChild(span);
     });
 }
-// 修復：手動新增生詞功能
 btnAddVocab.addEventListener('click', () => {
     const word = newVocabInput.value.trim();
     if (word && !vocabList.find(item => item.word === word)) {
@@ -90,19 +91,23 @@ btnAddVocab.addEventListener('click', () => {
     }
 });
 
-// 詞彙狀態更新與雙向連動
 function updateVocabState(isImportant, isGrammar) {
-    if (!selectedVocabTag) { alert('請先點選一個生詞標籤！'); return; }
+    if (!selectedVocabTag) return;
     selectedVocabTag.important = isImportant;
     selectedVocabTag.grammar = isGrammar;
     renderVocabUI();
     syncTextDisplay(selectedVocabTag);
 }
 
-document.getElementById('vocab-mark-general')?.addEventListener('click', () => updateVocabState(false, false));
-document.getElementById('vocab-mark-important')?.addEventListener('click', () => updateVocabState(true, selectedVocabTag.grammar));
-document.getElementById('vocab-mark-grammar')?.addEventListener('click', () => updateVocabState(selectedVocabTag.important, true));
-// 雙向連動：更新課文標記
+document.getElementById('vocab-mark-general')?.addEventListener('click', () => {
+    if(!selectedVocabTag) alert('請先點選標籤'); else updateVocabState(false, false);
+});
+document.getElementById('vocab-mark-important')?.addEventListener('click', () => {
+    if(!selectedVocabTag) alert('請先點選標籤'); else updateVocabState(true, selectedVocabTag.grammar);
+});
+document.getElementById('vocab-mark-grammar')?.addEventListener('click', () => {
+    if(!selectedVocabTag) alert('請先點選標籤'); else updateVocabState(selectedVocabTag.important, true);
+});
 function syncTextDisplay(vocabObj) {
     const walker = document.createTreeWalker(textDisplay, NodeFilter.SHOW_TEXT, null, false);
     const nodesToReplace = [];
@@ -130,10 +135,35 @@ function syncTextDisplay(vocabObj) {
         }
     });
 }
-// 讓右側原本的工具按鈕也能套用相同的雙向連動邏輯
-document.getElementById('mark-important')?.addEventListener('click', () => updateVocabState(true, selectedVocabTag?.grammar || false));
-document.getElementById('mark-general')?.addEventListener('click', () => updateVocabState(false, false));
-document.getElementById('mark-grammar')?.addEventListener('click', () => updateVocabState(selectedVocabTag?.important || false, true));
+function applyTextSelectionMark(type) {
+    const selection = window.getSelection();
+    const selectedText = selection.toString().trim();
+
+    if (selectedText) {
+        let existingVocab = vocabList.find(v => v.word === selectedText);
+        if (!existingVocab) {
+            existingVocab = { word: selectedText, important: false, grammar: false };
+            vocabList.push(existingVocab);
+        }
+        if (type === 'general') { existingVocab.important = false; existingVocab.grammar = false; }
+        else if (type === 'important') { existingVocab.important = true; }
+        else if (type === 'grammar') { existingVocab.grammar = true; }
+        
+        selectedVocabTag = existingVocab;
+        renderVocabUI();
+        syncTextDisplay(existingVocab);
+        selection.removeAllRanges();
+    } else if (selectedVocabTag) {
+        if (type === 'general') updateVocabState(false, false);
+        else if (type === 'important') updateVocabState(true, selectedVocabTag.grammar);
+        else if (type === 'grammar') updateVocabState(selectedVocabTag.important, true);
+    } else {
+        alert('請先點選一個生詞標籤，或在左側反白課文文字！');
+    }
+}
+document.getElementById('mark-general')?.addEventListener('click', () => applyTextSelectionMark('general'));
+document.getElementById('mark-important')?.addEventListener('click', () => applyTextSelectionMark('important'));
+document.getElementById('mark-grammar')?.addEventListener('click', () => applyTextSelectionMark('grammar'));
 
 btnSaveEdit.addEventListener('click', () => {
     step2.classList.remove('active'); step2.classList.add('hidden');
