@@ -1,70 +1,190 @@
-/* 基礎設定與字體 */
+/* 基礎設定與溫暖背景 */
 body {
     font-family: 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', sans-serif;
-    background-color: #f9f9f9;
-    color: #333333;
+    background-color: #fdf8f4; /* 溫暖的米膚色背景 */
+    color: #4a4a4a;
     line-height: 1.6;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
 }
 
+/* 頂部品牌標頭設計 */
+.app-header {
+    background-color: #ffffff;
+    padding: 30px 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.logo-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.logo-circle {
+    background-color: #2c3e50;
+    color: #f6d365;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.brand-text h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    color: #333;
+}
+.brand-text p {
+    margin: 0;
+    color: #f28b71; /* 橘粉色品牌字 */
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* 進度條設計 */
+.step-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.step-item.active {
+    background-color: #f28b71;
+    color: white;
+}
+
+.step-num {
+    background-color: #fff;
+    color: #f28b71;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+.step-item:not(.active) .step-num {
+    background-color: #eee;
+    color: #aaa;
+}
+
+.step-arrow {
+    color: #ddd;
+}
+
+/* 內容區塊 */
 .container {
     max-width: 900px;
     margin: 0 auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 0 20px 40px 20px;
 }
 
-/* 視圖切換控制 */
-.view-section {
-    display: none;
+/* 卡片式設計 */
+.card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    margin-bottom: 20px;
+    border: 1px solid #fef3e9;
 }
-.view-section.active {
-    display: block;
+
+.title-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.title-section h2 {
+    color: #8c7a6b;
+    margin-bottom: 5px;
+}
+.title-section p {
+    color: #888;
+    font-size: 0.95rem;
+}
+
+.card h3 {
+    color: #e56b55;
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+.card-hint {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
 }
 
 /* 表單與輸入區 */
 textarea {
     width: 100%;
-    height: 150px;
+    height: 120px;
     margin-top: 10px;
     margin-bottom: 20px;
     padding: 15px;
-    font-size: 1.2rem;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    font-size: 1.1rem;
+    border: 1px solid #f0e6dd;
+    border-radius: 12px;
     box-sizing: border-box;
+    background-color: #fff;
+    color: #555;
+    transition: border-color 0.3s;
+}
+textarea:focus {
+    outline: none;
+    border-color: #f28b71;
+}
+label {
+    font-weight: bold;
+    color: #666;
 }
 
-/* 一般尺寸按鈕設計 */
+/* 按鈕設計 (仿截圖風格) */
 button {
-    display: block;
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
+    font-family: inherit;
     cursor: pointer;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
-
 .primary-btn {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #fdf1e8;
+    color: #d95e40;
+    border: 1px solid #f5d6c6;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    display: inline-block;
+    transition: all 0.3s;
 }
 .primary-btn:hover {
-    background-color: #45a049;
+    background-color: #f7e0d0;
 }
-
-.tool-btn {
-    background-color: #e0e0e0;
-    color: #333;
-    width: 100%;
-}
-.tool-btn:hover {
-    background-color: #d0d0d0;
+.action-card {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
 }
 
 /* 編輯區版面佈局 */
@@ -73,32 +193,37 @@ button {
     gap: 20px;
     margin-bottom: 20px;
 }
-
 .text-display {
     flex: 2;
-    border: 2px solid #ccc;
+    border: 1px solid #f0e6dd;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 1.4rem;
-    min-height: 300px;
+    min-height: 200px;
+    background-color: #fff;
 }
-
 .tools-panel {
     flex: 1;
-    background: #f5f5f5;
+    background: #fdfdfd;
+    border: 1px solid #f0e6dd;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 12px;
+}
+.tool-btn {
+    background-color: #f5f5f5;
+    color: #555;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
 }
 
+/* 視圖切換控制 */
+.view-section { display: none; }
+.view-section.active { display: block; }
+
 /* 文本對話排版 */
-.dialogue-a {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-.dialogue-b {
-    color: #8e44ad;
-    margin-bottom: 10px;
-}
-.paragraph {
-    margin-bottom: 15px;
-}
+.dialogue-a { color: #2c3e50; margin-bottom: 10px; }
+.dialogue-b { color: #8e44ad; margin-bottom: 10px; }
+.paragraph { margin-bottom: 15px; }
